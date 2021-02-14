@@ -1,1 +1,0 @@
-prog1: prog1.c LinkedList.h Queue.h Stack.h

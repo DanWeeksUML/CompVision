@@ -1,3 +1,5 @@
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,52 +14,14 @@ struct queue {
     struct node* tail;
 };
 
-struct queue*
-    queueCreate(void)
-{
-    struct queue* q;
-    q = malloc(sizeof(struct queue));
-    q->head = q->tail = 0;
-    return q;
-}
+struct queue* queueCreate(void);
 
-void enq(struct queue* q, int value)
-{
-    struct node* e;
-    e = malloc(sizeof(struct node));
-    e->value = value;
-    e->next = 0;
-    if (q->head == 0) {
-        q->head = e;
-    }
-    else {
-        q->tail->next = e;
-    }
-    q->tail = e;
-}
+void enq(struct queue* q, int value);
 
-int queueEmpty(const struct queue* q)
-{
-    return (q->head == 0);
-}
+int queueEmpty(const struct queue* q);
 
-int deq(struct queue* q)
-{
-    int temp;
-    struct node* e;
-    temp = q->head->value;
-    e = q->head;
-    q->head = e->next;
-    free(e);
-    return temp;
-}
+int deq(struct queue* q);
 
+void queueDestroy(struct queue* q);
 
-void queueDestroy(struct queue* q)
-{
-    while (!queueEmpty(q)) {
-        deq(q);
-    }
-
-    free(q);
-}
+#endif
