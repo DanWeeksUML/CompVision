@@ -1,0 +1,1 @@
+prog1: gcc prog1.c LinkedList.c Queue.c Stack.c -o prog1
