@@ -1,8 +1,15 @@
+//================= L i n k e d L i s t . h =========================
+// Daniel Weeks
+// EECE.5811 Operating Systems
+// Due 2/12/2021
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
 #include <stdio.h>
 #include <stdlib.h>
+
+//--------------- D A T A   S T R U C T U R E S -------------------
 
 struct listNode {
     struct listNode* next;
@@ -13,6 +20,8 @@ struct linkedList {
     struct listNode* head;
     struct listNode* current;
 };
+
+//--------------- F U N C T I O N S -------------------
 
 struct linkedList* listCreate(void);
 
