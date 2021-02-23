@@ -26,27 +26,29 @@ pid_t children[100];
 int main(int argc, char** argv)
 {
     //Check for the minumum number of command line arguments
-    //if (argc < 2) {
-    //    printf("PLEASE ADD TEXT FILE NAME\n");
-    //    return 0;
-    //}
-    //else
-    //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
+    if (argc < 2) {
+        printf("PLEASE PASS NUMBER OF CHILDREN THROUGH COMMAND LINE\n");
+        return 0;
+    }
+    
     pid_t parent, pid, child;
-    int end;
+    int end, i;
     int childNum = 0;
     parent = getpid();
     printf("Parent pid is %d\n", parent);
-    if (fork() == 0) {
-        pid = getpid();
-        children[1] = pid;
-        printf("Child pid is %d\n", pid);
-        return 1;
+
+    for (int i = 1; i <= argv[1]; i++) {
+        if (fork() == 0) {
+            pid = getpid();
+            children[1] = pid;
+            printf("Child pid is %d\n", pid);
+            return 0;
+        }
     }
-    else {
+    for (int i = 1; i <= argv[1]; i++) {
         pid = getpid();
         child = wait(&end);
-        for (int i = 1; i < 100; i++) {
+        for (i = 1; i < 100; i++) {
             if (children[i] == child)
                 childNum = i;
         }
