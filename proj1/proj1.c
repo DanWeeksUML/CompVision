@@ -9,11 +9,11 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int children[100] = { 0 };
+int children[100] = { 666 };
 
-void store(pid_t pid, int num) {
-    children[num] = pid;
-}
+//void store(pid_t pid, int num) {
+//    children[num] = pid;
+//}
 
 //int access(pid_t pid) {
 //    for (int i = 1; i < 100; i++) {
@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     printf("Parent pid is %d\n", parent);
     if (fork() == 0) {
         pid = getpid();
-        store(pid, 1);
+        children[1] = pid;
         printf("Child pid is %d\n", pid);
         return 1;
     }
