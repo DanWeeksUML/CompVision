@@ -33,7 +33,7 @@ int main(int argc, char** argv)
         }
         else {
             children[i] = forkNum;
-            printf("%d\n", children[i]);
+            printf("DEMON:%d\n", children[i]);
         }
     }
     i = 0;
