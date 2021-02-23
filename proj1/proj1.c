@@ -47,7 +47,7 @@ int main(int argc, char** argv)
         pid = getpid();
         child = wait(&end);
         for (int i = 1; i < 100; i++) {
-            if (children[i] == pid)
+            if (children[i] == child)
                 childNum = i;
         }
         printf("Child %d (PID %d) is finished\n", childNum, child);
