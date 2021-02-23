@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     }
     int childArray[100];
     pid_t parent, pid, child;
-    int end, i, forkNum;
+    int end, i, forkNum, random;
     int childNum = 0;
     char testCommand[7];
     testCommand[0] = '.';
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     testCommand[5] = 't';
     testCommand[6] = 5 + '0';
 
-    printf("TESTNAME: %s\n", testCommand);
+    
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
@@ -38,6 +38,9 @@ int main(int argc, char** argv)
         if (forkNum == 0) {
             pid = getpid();
             printf("Statred child %d with pid %d\n", i, pid);
+            random = rand() % 5 + 1;
+            testCommand[6] = random + '0';
+            printf("TESTNAME: %s\n", testCommand);
             return 0;
         }
         else {
