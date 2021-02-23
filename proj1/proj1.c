@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     testCommand[5] = 't';
     testCommand[6] = '1';
 
-    printf("%s\n", testCommand);
+    printf("TESTNAME: %s\n", testCommand);
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
