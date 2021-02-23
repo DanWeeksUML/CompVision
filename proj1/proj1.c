@@ -16,10 +16,20 @@ int main(int argc, char** argv)
         printf("PLEASE PASS NUMBER OF CHILDREN THROUGH COMMAND LINE\n");
         return 0;
     }
-    int children[100];
+    int childArray[100];
     pid_t parent, pid, child;
     int end, i, forkNum;
     int childNum = 0;
+    char testCommand[7];
+    testCommand[0] = '.';
+    testCommand[1] = '/';
+    testCommand[2] = 't';
+    testCommand[3] = 'e';
+    testCommand[4] = 's';
+    testCommand[5] = 't';
+    testCommand[6] = '1';
+
+    printf("%s\n", testCommand);
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
@@ -31,15 +41,17 @@ int main(int argc, char** argv)
             return 0;
         }
         else {
-            children[i] = forkNum;
+            childArray[i] = forkNum;
         }
     }
     i = 0;
     while (i < atoi(argv[1])) {
         child = wait(&end);
         for (int i = 1; i <= atoi(argv[1]); i++) {
-            if (child == children[i])
+            if (child == childArray[i]) {
                 childNum = i;
+                break;
+            }
         }
         printf("Child %d (PID %d) is finished\n", childNum, child);
         i++;
