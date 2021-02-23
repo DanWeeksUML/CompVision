@@ -24,12 +24,13 @@ int main(int argc, char** argv)
     if (fork() == 0) {
         pid = getpid();
         printf("Child pid is %d\n", pid);
+        return 1;
     }
     else {
         pid = getpid();
         printf("Parent pid is %d\n", pid);
         child = wait(&end);
-        printf("Child (PID %d) is finished\n", child);
+        printf("Child %d (PID %d) is finished\n", end, child);
     }
 
     return 0;
