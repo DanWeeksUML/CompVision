@@ -55,5 +55,6 @@ int main(int argc, char** argv)
         printf("Child %d (PID %d) is finished\n", childNum, child);
     }
 
+    printf("Parent is finished\n", childNum, child);
     return 0;
 }
