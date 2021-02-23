@@ -21,13 +21,14 @@ int main(int argc, char** argv)
     int end, i, forkNum;
     int childNum = 0;
     char testCommand[7];
-    testCommand[0] = '.';
-    testCommand[1] = '/';
-    testCommand[2] = 't';
-    testCommand[3] = 'e';
-    testCommand[4] = 's';
-    testCommand[5] = 't';
-    testCommand[6] = '1';
+    testCommand = "./test1";
+    //testCommand[0] = '.';
+    //testCommand[1] = '/';
+    //testCommand[2] = 't';
+    //testCommand[3] = 'e';
+    //testCommand[4] = 's';
+    //testCommand[5] = 't';
+    //testCommand[6] = '1';
 
     printf("TESTNAME: %s\n", testCommand);
     parent = getpid();
