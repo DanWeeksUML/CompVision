@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int children[100] = { 666 };
+pid_t children[100];
 
 //void store(pid_t pid, int num) {
 //    children[num] = pid;
