@@ -1,2 +1,2 @@
 compile:
-	gcc progj.c -o proj1
+	gcc proj1.c -o proj1
