@@ -52,7 +52,7 @@ int main(int argc, char** argv)
             if (children[i] == child)
                 childNum = i;
         }
-        printf("Child %d (PID %d) is finished\n", childNum, child);
+        printf("Child %d (PID %d) is finished\n");
     }
 
     printf("Parent is finished\n", childNum, child);
