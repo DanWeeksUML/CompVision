@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     testCommand[3] = 'e';
     testCommand[4] = 's';
     testCommand[5] = 't';
-    testCommand[6] = itoa(rand() % 6 + 1);
+    testCommand[6] = (rand() % 5 + 1)) + '0';
 
     printf("TESTNAME: %s\n", testCommand);
     parent = getpid();
