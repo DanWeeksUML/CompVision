@@ -16,7 +16,7 @@ void store(pid_t pid, int num) {
 }
 
 int access(pid_t pid) {
-    for (int i = 1; while i < 100; i++) {
+    for (int i = 1; i < 100; i++) {
         if (children[i] == pid)
             return i;
     }
