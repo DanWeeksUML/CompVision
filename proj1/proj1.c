@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 
     for (int i = 1; i <= atoi(argv[1]); i++) {
         forkNum = fork();
+        printf("%d\n", forkNum);
         if (forkNum == 0) {
             pid = getpid();
             printf("Child pid is %d\n", pid);
