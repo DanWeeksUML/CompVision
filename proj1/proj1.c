@@ -38,6 +38,7 @@ int main(int argc, char** argv)
         if (forkNum == 0) {
             pid = getpid();
             printf("Statred child %d with pid %d\n", i, pid);
+            srand(i);
             random = rand() % 5 + 1;
             testCommand[6] = random + '0';
             printf("TESTNAME: %s\n", testCommand);
