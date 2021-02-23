@@ -40,20 +40,44 @@ int main(int argc, char** argv)
     for (int i = 1; i <= atoi(argv[1]); i++) {
         if (fork() == 0) {
             pid = getpid();
-            children[1] = pid;
+            children[i] = pid;
             printf("Child pid is %d\n", pid);
             return 0;
         }
     }
-    for (int i = 1; i <= atoi(argv[1]); i++) {
-        pid = getpid();
-        child = wait(&end);
-        for (i = 1; i < 100; i++) {
-            if (children[i] == child)
-                childNum = i;
-        }
-        printf("Child %d (PID %d) is finished\n", childNum, child);
+    //for (int i = 1; i <= atoi(argv[1]); i++) {
+    //    pid = getpid();
+    //   child = wait(&end);
+    //    for (i = 1; i < 100; i++) {
+    //        if (children[i] == child)
+    //            childNum = i;
+    //    }
+    //    printf("Child %d (PID %d) is finished\n", childNum, child);
+    //}
+    child = wait(&end);
+    for (i = 1; i < 100; i++) {
+        if (children[i] == child)
+            childNum = i;
     }
+    printf("Child %d (PID %d) is finished\n", childNum, child);
+    child = wait(&end);
+    for (i = 1; i < 100; i++) {
+        if (children[i] == child)
+            childNum = i;
+    }
+    printf("Child %d (PID %d) is finished\n", childNum, child);
+    child = wait(&end);
+    for (i = 1; i < 100; i++) {
+        if (children[i] == child)
+            childNum = i;
+    }
+    printf("Child %d (PID %d) is finished\n", childNum, child);
+    child = wait(&end);
+    for (i = 1; i < 100; i++) {
+        if (children[i] == child)
+            childNum = i;
+    }
+    printf("Child %d (PID %d) is finished\n", childNum, child);
 
     printf("Parent is finished\n");
     return 0;
