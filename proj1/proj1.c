@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 int main(int argc, char** argv)
 {
@@ -17,14 +18,18 @@ int main(int argc, char** argv)
     //}
     //else
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
-    pid_t pid;
+    pid_t pid, child;
+    int end;
+
     if (fork() == 0) {
         pid = getpid();
-        printf("Parent PID = %d\n", pid);
+        printf("Child pid is %d\n", pid);
     }
     else {
         pid = getpid();
-        printf("Child PID = %d\n", pid);
+        printf("Parent pid is %d\n", pid);
+        child = wait(&end);
+        printf("Child (PID %d) is finished\n", child);
     }
 
     return 0;
