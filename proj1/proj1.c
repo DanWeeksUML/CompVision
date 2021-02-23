@@ -27,12 +27,11 @@ int main(int argc, char** argv)
         forkNum = fork();
         if (forkNum == 0) {
             pid = getpid();
-            printf("Child pid is %d\n", pid);
+            printf("Statred child %d with pid %d\n", i, pid);
             return 0;
         }
         else {
             children[i] = forkNum;
-            printf("DEMON:%d\n", children[i]);
         }
     }
     i = 0;
