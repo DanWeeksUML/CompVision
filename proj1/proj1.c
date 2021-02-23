@@ -16,18 +16,23 @@ int main(int argc, char** argv)
         printf("PLEASE PASS NUMBER OF CHILDREN THROUGH COMMAND LINE\n");
         return 0;
     }
-    
+    int children[100];
     pid_t parent, pid, child;
-    int end, i;
+    int end, i, forkNum;
     int childNum = 0;
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
     for (int i = 1; i <= atoi(argv[1]); i++) {
-        if (fork() == 0) {
+        forkNum = fork();
+        if (forkNum == 0) {
             pid = getpid();
             printf("Child pid is %d\n", pid);
             return 0;
+        }
+        else {
+            children[i] = forkNum;
+            printf("%d\n", children[i]);
         }
     }
     i = 0;
