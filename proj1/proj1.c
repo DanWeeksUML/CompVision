@@ -25,7 +25,6 @@ int main(int argc, char** argv)
 
     for (int i = 1; i <= atoi(argv[1]); i++) {
         forkNum = fork();
-        printf("%d\n", forkNum);
         if (forkNum == 0) {
             pid = getpid();
             printf("Child pid is %d\n", pid);
@@ -39,7 +38,11 @@ int main(int argc, char** argv)
     i = 0;
     while (i < atoi(argv[1])) {
         child = wait(&end);
-        printf("Child X (PID %d) is finished\n", child);
+        for (int i = 1; i <= atoi(argv[1]); i++) {
+            if (child == children[i])
+                childNum = i;
+        }
+        printf("Child %d (PID %d) is finished\n", childNum, child);
         i++;
     }
 
