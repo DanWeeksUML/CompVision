@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
-    for (int i = 1; i <= argv[1]; i++) {
+    for (int i = 1; i <= atoi(argv[1]); i++) {
         if (fork() == 0) {
             pid = getpid();
             children[1] = pid;
@@ -45,7 +45,7 @@ int main(int argc, char** argv)
             return 0;
         }
     }
-    for (int i = 1; i <= argv[1]; i++) {
+    for (int i = 1; i <= atoi(argv[1]); i++) {
         pid = getpid();
         child = wait(&end);
         for (i = 1; i < 100; i++) {
