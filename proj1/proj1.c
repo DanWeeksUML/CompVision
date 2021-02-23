@@ -9,20 +9,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-pid_t children[100];
-
-//void store(pid_t pid, int num) {
-//    children[num] = pid;
-//}
-
-//int access(pid_t pid) {
-//    for (int i = 1; i < 100; i++) {
-//        if (children[i] == pid)
-//            return i;
-//    }
-//    return 0;
-//}
-
 int main(int argc, char** argv)
 {
     //Check for the minumum number of command line arguments
@@ -40,45 +26,17 @@ int main(int argc, char** argv)
     for (int i = 1; i <= atoi(argv[1]); i++) {
         if (fork() == 0) {
             pid = getpid();
-            children[i] = pid;
             printf("Child pid is %d\n", pid);
             return 0;
         }
     }
-    //for (int i = 1; i <= atoi(argv[1]); i++) {
-    //    pid = getpid();
-    //   child = wait(&end);
-    //    for (i = 1; i < 100; i++) {
-    //        if (children[i] == child)
-    //            childNum = i;
-    //    }
-    //    printf("Child %d (PID %d) is finished\n", childNum, child);
-    //}
-    child = wait(&end);
-    for (i = 1; i < 100; i++) {
-        if (children[i] == child)
-            childNum = i;
+    i = 0;
+    while (i < atoi(argv[1])) {
+        child = wait(&end);
+        printf("Child X (PID %d) is finished\n", child);
+        i++;
     }
-    printf("Child %d (PID %d) is finished\n", childNum, child);
-    child = wait(&end);
-    for (i = 1; i < 100; i++) {
-        if (children[i] == child)
-            childNum = i;
-    }
-    printf("Child %d (PID %d) is finished\n", childNum, child);
-    child = wait(&end);
-    for (i = 1; i < 100; i++) {
-        if (children[i] == child)
-            childNum = i;
-    }
-    printf("Child %d (PID %d) is finished\n", childNum, child);
-    child = wait(&end);
-    for (i = 1; i < 100; i++) {
-        if (children[i] == child)
-            childNum = i;
-    }
-    printf("Child %d (PID %d) is finished\n", childNum, child);
 
-    printf("Parent is finished\n");
+    printf("Parent (PID %d) is finished\n", parent);
     return 0;
 }
