@@ -9,19 +9,19 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int children[100];
+int children[100] = { 0 };
 
 void store(pid_t pid, int num) {
     children[num] = pid;
 }
 
-int access(pid_t pid) {
-    for (int i = 1; i < 100; i++) {
-        if (children[i] == pid)
-            return i;
-    }
-    return 0;
-}
+//int access(pid_t pid) {
+//    for (int i = 1; i < 100; i++) {
+//        if (children[i] == pid)
+//            return i;
+//    }
+//    return 0;
+//}
 
 int main(int argc, char** argv)
 {
@@ -33,7 +33,8 @@ int main(int argc, char** argv)
     //else
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
     pid_t parent, pid, child;
-    int end, childNum;
+    int end;
+    int childNum = 0;
     parent = getpid();
     printf("Parent pid is %d\n", parent);
     if (fork() == 0) {
@@ -45,7 +46,10 @@ int main(int argc, char** argv)
     else {
         pid = getpid();
         child = wait(&end);
-        childNum = access(child);
+        for (int i = 1; i < 100; i++) {
+            if (children[i] == pid)
+                childNum = i;
+        }
         printf("Child %d (PID %d) is finished\n", childNum, child);
     }
 
