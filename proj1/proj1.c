@@ -27,8 +27,6 @@ int main(int argc, char** argv)
     testCommand[3] = 'e';
     testCommand[4] = 's';
     testCommand[5] = 't';
-    testCommand[6] = 5 + '0';
-
     
     parent = getpid();
     printf("Parent pid is %d\n", parent);
@@ -49,6 +47,8 @@ int main(int argc, char** argv)
             childArray[i] = forkNum;
         }
     }
+
+
     i = 0;
     while (i < atoi(argv[1])) {
         child = wait(&end);
