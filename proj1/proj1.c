@@ -18,8 +18,8 @@ int main(int argc, char** argv)
     //else
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
     pid_t pid;
-    pid = getpid();
     if (fork() == 0) {
+        pid = getpid();
         printf("Parent PID = %d\n", pid);
     }
     else {
