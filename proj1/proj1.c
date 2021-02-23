@@ -17,9 +17,10 @@ int main(int argc, char** argv)
     //}
     //else
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
-    //pid_t pid;
+    pid_t pid;
     fork();
-    printf("Hello\n");
+    pid = getpid();
+    printf("PID = %d\n", pid);
 
     return 0;
 }
