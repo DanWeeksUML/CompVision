@@ -19,8 +19,13 @@ int main(int argc, char** argv)
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
     pid_t pid;
     pid = getpid();
-    fork();
-    printf("PID = %d\n", pid);
+    if (fork() == 0) {
+        printf("Parent PID = %d\n", pid);
+    }
+    else {
+        pid = getpid();
+        printf("Child PID = %d\n", pid);
+    }
 
     return 0;
 }
