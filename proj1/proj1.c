@@ -9,6 +9,20 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+int children[100];
+
+void store(pid_t pid, int num) {
+    children[num] = pid;
+}
+
+int access(pid_t pid) {
+    for (int i = 1; while i < 100; i++) {
+        if (children[i] == pid)
+            return i;
+    }
+    return 0;
+}
+
 int main(int argc, char** argv)
 {
     //Check for the minumum number of command line arguments
@@ -19,19 +33,20 @@ int main(int argc, char** argv)
     //else
     //    printf("TEXT FILE SELECTED: %s\n", argv[1]);
     pid_t parent, pid, child;
-    int end;
+    int end, childNum;
     parent = getpid();
     printf("Parent pid is %d\n", parent);
     if (fork() == 0) {
         pid = getpid();
+        store(pid, 1);
         printf("Child pid is %d\n", pid);
         return 1;
     }
     else {
         pid = getpid();
-        printf("Parent pid is %d\n", pid);
         child = wait(&end);
-        printf("Child %d (PID %d) is finished\n", end, child);
+        childNum = access(child);
+        printf("Child %d (PID %d) is finished\n", childNum, child);
     }
 
     return 0;
