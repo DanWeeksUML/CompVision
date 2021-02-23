@@ -41,7 +41,7 @@ int main(int argc, char** argv)
             srand(i);
             random = rand() % 5 + 1;
             testCommand[6] = random + '0';
-            execlp(testCommand);
+            execlp(testCommand, "test", NULL);
             printf("TESTNAME: %s\n", testCommand);
             return 0;
         }
