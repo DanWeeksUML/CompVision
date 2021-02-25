@@ -16,10 +16,16 @@ int main(int argc, char** argv)
         printf("PLEASE PASS NUMBER OF CHILDREN THROUGH COMMAND LINE\n");
         return 0;
     }
-    int childArray[100];
+
+    //Variables declared
+    int childArray[999];
     pid_t parent, pid, child;
     int end, i, forkNum, random;
     int childNum = 0;
+    int numberOfChildren;
+    numberOfChildren = atoi(argv[1]);
+
+    //Test file path string started, missing test number
     char testCommand[7];
     testCommand[0] = '.';
     testCommand[1] = '/';
@@ -31,18 +37,31 @@ int main(int argc, char** argv)
     parent = getpid();
     printf("Parent pid is %d\n", parent);
 
-    for (int i = 1; i <= atoi(argv[1]); i++) {
+
+    //Parent uses this loop to create child processes 
+    for (int i = 1; i <= numberOfChildren); i++) {
         forkNum = fork();
+
+        //Child 
         if (forkNum == 0) {
+
+            //Child process obtains pid and declares that it has started
             pid = getpid();
             printf("Statred child %d with pid %d\n", i, pid);
+
+            //random number between 1 and 5 is obtained
             srand(i);
             random = rand() % 5 + 1;
+
+            //random number is added test file path string
             testCommand[6] = random + '0';
+
+            //random test file is executed
             execlp(testCommand, "test", NULL);
-            printf("TESTNAME: %s\n", testCommand);
             return 0;
         }
+
+        //Parent thread stores child thread pid in an array after creation
         else {
             childArray[i] = forkNum;
         }
@@ -50,18 +69,26 @@ int main(int argc, char** argv)
 
 
     i = 0;
-    while (i < atoi(argv[1])) {
+
+    //Parent uses this loop to wait for all child processes to end
+    while (i < numberOfChildren) {
+
+        //Parent waits for child to end, obtains ended child's pid
         child = wait(&end);
-        for (int i = 1; i <= atoi(argv[1]); i++) {
+
+        //Parent searches array to determine child number based on pid
+        for (int i = 1; i <= numberOfChildren; i++) {
             if (child == childArray[i]) {
                 childNum = i;
                 break;
             }
         }
+        //Print statement that specific child has ended
         printf("Child %d (PID %d) is finished\n", childNum, child);
         i++;
     }
 
+    //All child processes are ended, parent process ends
     printf("Parent (PID %d) is finished\n", parent);
     return 0;
 }
