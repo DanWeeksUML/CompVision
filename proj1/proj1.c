@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
 
     //Parent uses this loop to create child processes 
-    for (int i = 1; i <= numberOfChildren); i++) {
+    for (int i = 1; i <= numberOfChildren; i++) {
         forkNum = fork();
 
         //Child 
