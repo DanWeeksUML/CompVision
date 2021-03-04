@@ -33,10 +33,10 @@ void traverse(Node* first, unsigned TID) {
 
 	p = first;
 	while (p != NULL) {
-		pthread_mutex_lock(p->L);
+		pthread_mutex_lock(&(p->L));
 		printf("T%u: %d\n", TID, p->val);
 		p->val++;
-		pthread_mutex_unlock(p->L);
+		pthread_mutex_unlock(&(p->L));
 		p = p->next;
 	}
 }
