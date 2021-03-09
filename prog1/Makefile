@@ -1,2 +1,0 @@
-compile:
-	gcc prog1.c Stack.c Queue.c LinkedList.c -o prog1
