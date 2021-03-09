@@ -1,72 +1,30 @@
 //================= p r o g 1 . c =========================
 // Daniel Weeks
-// EECE.5811 Operating Systems
-// Due 2/12/2021
+// Due 3/10/2021
+
+// Sample Program to Read/Write image
 
 #include <stdio.h>
-#include "Queue.h"
-#include "Stack.h"
-#include "LinkedList.h"
+#include <stdlib.h>
+int main(int argc, char* argv[]) {
+	unsigned sizeX; //image width
+	unsigned sizeY; //image height
+	unsigned char* image; //image array
+	unsigned levels;
 
-int main(int argc, char** argv)
-{
-    //Check for the minumum number of command line arguments
-    if (argc < 2) {
-        printf("PLEASE ADD TEXT FILE NAME\n");
-        return 0;
-    }
-    else
-        printf("TEXT FILE SELECTED: %s\n", argv[1]);
+	/* Read Image */
 
-    int i = 0;
+	FILE* iFile = fopen("mri.pgm", "r");
+	if (iFile == 0) return 1;
+	if (3 != fscanf(iFile, "P5 %d %d %d ", &sizeX, &sizeY, &levels)) return 1;
+	image = (unsigned char*)malloc(sizeX * sizeY);
+	fread(image, sizeof(unsigned char), sizeX * sizeY, iFile);
+	fclose(iFile);
 
-    //Initialize queue, stack, and linked list data structures
-    struct queue* q;
-    struct stack* stk;
-    struct linkedList* list;
-    q = queueCreate();
-    stk = stackCreate();
-    list = listCreate();
+	/*write image to file*/
 
-
-    int c;
-    FILE* file;
-    file = fopen(argv[1], "r"); //open text file
-    while (!feof(file))
-    {
-        fscanf(file, "%d", &c); //scan text file for integers
-
-        //add each integer to all three data structures
-        enq(q, c); //queue
-        push(stk, c);  //stack
-        insert(list, c);  //linked list
-        
-    }
-    fclose(file);
-
-    //Print all queue elements and free memory
-    printf("QUEUE CONTENTS:\n");
-    while (!queueEmpty(q)) {
-        printf("%d ", deq(q));
-    }
-
-    //Print all stack elements and free memory
-    printf("\nSTACK CONTENTS:\n");
-    while (!stackEmpty(stk)) {
-        printf("%d ", pop(stk));
-    }
-
-    //Print all linked list elements and free memory
-    printf("\nLIST CONTENTS:\n");
-    while (!listEmpty(list)) {
-        printf("%d ", popList(list));
-    }
-    printf("\n");
-
-    //Free memory of remaining data structures and their elements
-    queueDestroy(q);
-    stackDestroy(stk);
-    listDestroy(list);
-
-    return 0;
+	iFile = fopen("mri2.pgm", "w");
+	if (iFile == 0) return 1; //error handling
+	fprintf(iFile, "P5 %d %d %d ", sizeX, sizeY, 255);//write header
+	fwrite(image, sizeof(unsigned char), sizeX * sizeY, iFile); //write binary image
 }
